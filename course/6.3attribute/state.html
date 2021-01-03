@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style></style>
+  </head>
+  <body>
+    <div id="test"></div>
+    <script src="../dep/react.development.js"></script>
+    <script src="../dep/react-dom.development.js"></script>
+    <!-- 生产环境中不建议使用 -->
+    <script src="../dep/babel.min.js"></script>
+
+    <script type="text/babel">
+      class Demo extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            isHot: false,
+          };
+          this.change = this.change.bind(this);
+        }
+        render() {
+          return (
+            <h2 onClick={this.change}>
+              今天天气很{this.state.isHot ? "炎热" : "凉爽"}
+            </h2>
+          );
+        }
+        change() {
+          console.log("change");
+          this.setState({isHot:!this.state.isHot});
+        }
+      }
+
+      ReactDOM.render(<Demo />, document.getElementById("test"));
+      //react解析组件标签，找到了组件
+      //发现该组件是类定义的，new实例，然后调用render方法
+      //虚拟dom转为真实dom
+    </script>
+  </body>
+</html>
