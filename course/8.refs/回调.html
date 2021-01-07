@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="test"></div>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <!-- 生产环境中不建议使用 -->
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+
+    <script type="text/babel">
+    class Demo extends React.Component{
+      state={isHot:true}
+
+      showData=()=>{
+        
+        const{input1}=this
+        alert(input1.value)
+        }
+
+        
+      changeWeather=()=>{
+        
+        const{isHot}=this.state
+        this.setState({isHot:!isHot})
+        }
+        render(){//react通过newdemo的实例，调用render的jsx，调用了ref中的回调函数，回调中()=>的this就是实例
+             const{isHot}=this.state
+             console.log(this.state)
+             return(//c这个参数就是调用它的结点
+           
+                <div>
+                    <input ref={(c)=>{
+                      this.input1=c
+                    }} type="text"/>
+                    <button ref="button1"onClick={this.showData}>点我提示左侧数据</button>
+                    <button ref="button2"onClick={this.changeWeather}>点我切换天气</button>
+                    <input ref="input2" onBlur={this.showData}type="text" placeholder="失去焦点提示数据"/>
+                    </div>
+            )
+        }
+
+    }
+      ReactDOM.render(<Demo/>,document.getElementById('test'))//（虚拟dom，容器）
+    </script>
+  </body>
+</html>
