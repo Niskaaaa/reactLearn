@@ -14,14 +14,17 @@
 
     <script type="text/babel">
     class Login extends React.Component{
-        handleSubmit=()=>{
-          event.preventDefault()
-            const{username,pwd}=this
-            alert(this.username.value)
+        state={
+            username:'',
+            pwd:''
         }
+        demo = (event)=>{
+            this.setState({username:event.target.value})
+        }
+
         render(){
-            return(<form  onSubmit={this.handleSubmit}>
-                用户名：<input ref={c=>this.username=c}type="text" name="username"/>
+            return(<form >
+                用户名：<input onChange={this.demo} ref={c=>this.username=c}type="text" name="username"/>
                 密码：<input ref={c=>this.pwd=c} type="password" name="pwd"/>
                 <button>登录</button>
                 </form>)
